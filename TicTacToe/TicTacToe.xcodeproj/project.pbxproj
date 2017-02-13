@@ -15,9 +15,10 @@
 		1C1F89A11E4FAC4400DC409D /* GamePieces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1F89A01E4FAC4400DC409D /* GamePieces.swift */; };
 		1C1F89A31E500F1A00DC409D /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1F89A21E500F1A00DC409D /* Game.swift */; };
 		1C1F89A71E510ECD00DC409D /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C1F89A61E510ECD00DC409D /* SoundManager.swift */; };
-		1C1F89AC1E510F3600DC409D /* Breathless Harp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F89A91E510F3600DC409D /* Breathless Harp.caf */; };
-		1C1F89AD1E510F3600DC409D /* Neon Fireworks Beat 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F89AA1E510F3600DC409D /* Neon Fireworks Beat 01.caf */; };
-		1C1F89AE1E510F3600DC409D /* Zip Line Bass 01.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C1F89AB1E510F3600DC409D /* Zip Line Bass 01.caf */; };
+		1C53173E1E524D8800CA13A5 /* Afterburner Synth Lead.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C53173A1E524D8800CA13A5 /* Afterburner Synth Lead.caf */; };
+		1C53173F1E524D8800CA13A5 /* buzzer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C53173B1E524D8800CA13A5 /* buzzer.caf */; };
+		1C5317401E524D8800CA13A5 /* drag.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C53173C1E524D8800CA13A5 /* drag.caf */; };
+		1C5317411E524D8800CA13A5 /* placePiece.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C53173D1E524D8800CA13A5 /* placePiece.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +32,10 @@
 		1C1F89A01E4FAC4400DC409D /* GamePieces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePieces.swift; sourceTree = "<group>"; };
 		1C1F89A21E500F1A00DC409D /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		1C1F89A61E510ECD00DC409D /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		1C1F89A91E510F3600DC409D /* Breathless Harp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Breathless Harp.caf"; sourceTree = "<group>"; };
-		1C1F89AA1E510F3600DC409D /* Neon Fireworks Beat 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Neon Fireworks Beat 01.caf"; sourceTree = "<group>"; };
-		1C1F89AB1E510F3600DC409D /* Zip Line Bass 01.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Zip Line Bass 01.caf"; sourceTree = "<group>"; };
+		1C53173A1E524D8800CA13A5 /* Afterburner Synth Lead.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Afterburner Synth Lead.caf"; sourceTree = "<group>"; };
+		1C53173B1E524D8800CA13A5 /* buzzer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = buzzer.caf; sourceTree = "<group>"; };
+		1C53173C1E524D8800CA13A5 /* drag.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = drag.caf; sourceTree = "<group>"; };
+		1C53173D1E524D8800CA13A5 /* placePiece.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = placePiece.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,7 @@
 				1C1F89A01E4FAC4400DC409D /* GamePieces.swift */,
 				1C1F89A21E500F1A00DC409D /* Game.swift */,
 				1C1F89A61E510ECD00DC409D /* SoundManager.swift */,
-				1C1F89A81E510F3600DC409D /* Sounds */,
+				1C5317391E524D8800CA13A5 /* Sounds2 */,
 				1C1F89951E4FA7DF00DC409D /* Assets.xcassets */,
 				1C1F89971E4FA7DF00DC409D /* LaunchScreen.storyboard */,
 				1C1F899A1E4FA7DF00DC409D /* Info.plist */,
@@ -80,14 +82,15 @@
 			path = TicTacToe;
 			sourceTree = "<group>";
 		};
-		1C1F89A81E510F3600DC409D /* Sounds */ = {
+		1C5317391E524D8800CA13A5 /* Sounds2 */ = {
 			isa = PBXGroup;
 			children = (
-				1C1F89A91E510F3600DC409D /* Breathless Harp.caf */,
-				1C1F89AA1E510F3600DC409D /* Neon Fireworks Beat 01.caf */,
-				1C1F89AB1E510F3600DC409D /* Zip Line Bass 01.caf */,
+				1C53173A1E524D8800CA13A5 /* Afterburner Synth Lead.caf */,
+				1C53173B1E524D8800CA13A5 /* buzzer.caf */,
+				1C53173C1E524D8800CA13A5 /* drag.caf */,
+				1C53173D1E524D8800CA13A5 /* placePiece.caf */,
 			);
-			path = Sounds;
+			path = Sounds2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,12 +153,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C5317401E524D8800CA13A5 /* drag.caf in Resources */,
 				1C1F89991E4FA7DF00DC409D /* LaunchScreen.storyboard in Resources */,
-				1C1F89AE1E510F3600DC409D /* Zip Line Bass 01.caf in Resources */,
+				1C53173F1E524D8800CA13A5 /* buzzer.caf in Resources */,
 				1C1F89961E4FA7DF00DC409D /* Assets.xcassets in Resources */,
+				1C5317411E524D8800CA13A5 /* placePiece.caf in Resources */,
+				1C53173E1E524D8800CA13A5 /* Afterburner Synth Lead.caf in Resources */,
 				1C1F89941E4FA7DF00DC409D /* Main.storyboard in Resources */,
-				1C1F89AC1E510F3600DC409D /* Breathless Harp.caf in Resources */,
-				1C1F89AD1E510F3600DC409D /* Neon Fireworks Beat 01.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +336,7 @@
 				1C1F899F1E4FA7DF00DC409D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

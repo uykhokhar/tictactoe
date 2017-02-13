@@ -10,9 +10,10 @@ import Foundation
 import AudioToolbox
 
 enum Sound : String {
-    case buzzer = "Zip Line Bass 01"
-    case beginDrag = "Breathless Harp"
-    case win = "Neon Fireworks Beat 01"
+    case buzzer = "buzzer"
+    case beginDrag = "drag"
+    case sucess = "placePiece"
+    case win = "Afterburner Synth Lead"
 }
 
 

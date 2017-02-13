@@ -314,7 +314,7 @@ class ViewController: UIViewController {
                 if checkValidPlacement(tile: tile){
                     //if valid placement: snap into place, play sound, update game board, check winner, else check if draw
                     snapIntoPlace(piece: game.currentPiece, tile: tile)
-                    SoundManager.shared.play(effect: .win)
+                    SoundManager.shared.play(effect: .sucess)
                     game.setTile(row: tile.row, column: tile.column, piece: game.currentPiece.type)
                     
                     //if winner present winner, else if game over then make new game, else, make new turn
@@ -323,6 +323,7 @@ class ViewController: UIViewController {
                         print("winner is \(winner.rawValue)")
                         game.allPieces.append(game.otherPiece)
                         drawLine(acrossTiles: game.winningTiles!)
+                        SoundManager.shared.play(effect: .win)
                         presentWinView(winningPiece: winner)
                     } else if game.gameOver { //new board
                         print("Game Over!")
