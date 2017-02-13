@@ -32,71 +32,75 @@ extension UIImage {
 
 
 class GamePieces: UIImageView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
     
-    let type : pieceType
+    var type : pieceType
+    var state : Bool = false
+    let xOrigin = CGPoint(x: 61, y: 557)
+    let oOrigin = CGPoint(x: 314, y: 557)
+    
     
     // Attribution: - https://www.ioscreator.com/tutorials/dragging-views-gestures-tutorial-ios8-swift
-    init(pieceType: pieceType){
-        super.init(image: UIImage(asset: pieceType))
+    init(type: pieceType){
+        self.type = type
+        super.init(image: UIImage(asset: type))
         
         //set location of pieces based on type
-        switch pieceType {
+        switch type {
         case .O:
-            self.center = CGPoint(x: 314, y: 557)
-            self.frame = CGRect(x: 314, y: 557, width: 90.0, height: 90.0)
+            self.center = oOrigin
+            self.frame = CGRect(x: 269, y: 512, width: 90.0, height: 90.0)
         case .X:
-            self.center = CGPoint(x: 61, y: 557)
-            self.frame = CGRect(x: 61, y: 557, width: 90.0, height: 90.0)
+            self.center = xOrigin
+            self.frame = CGRect(x: 16 , y: 512, width: 90.0, height: 90.0)
         }
         
-        //gesture added
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        self.addGestureRecognizer(panGesture)
-        self.isUserInteractionEnabled = true
-    
+        self.backgroundColor = UIColor.clear
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func handlePan(_ recognizer:UIPanGestureRecognizer) {
-        
-        // Determine where the view is in relation to the superview
-        let translation = recognizer.translation(in: self.superview)
-        
-        if let view = recognizer.view {
-            // Set the view's center to the new position
-            view.center = CGPoint(x:view.center.x + translation.x,
-                                  y:view.center.y + translation.y)
-        }
-        
-        // Reset the translation back to zero, so we are dealing
-        // in offsets
-        recognizer.setTranslation(CGPoint.zero, in: self.superview)
-        
-        
-        
-        if recognizer.state == UIGestureRecognizerState.ended {
-            print("ended at: \(recognizer)")
-        }
-        
-        
+    
+    
+    
+    // Mark: -Game Play functions
+    func diable(alpha: CGFloat){
+        self.isUserInteractionEnabled = false
+        self.alpha = alpha
+    }
+
+    func enable(){
+        self.isUserInteractionEnabled = true
+        self.alpha = 1
     }
     
     
-
+    func scaleAnimation(){
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.transform = CGAffineTransform(scaleX: 2, y: 2)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.6) {
+                            self.transform = CGAffineTransform.identity
+                        }
+        })
+    }
     
-    
-    
+    func origin() -> CGPoint {
+        let orgin : CGPoint
+        
+        switch self.type {
+        case .O:
+            orgin = oOrigin
+        case .X:
+            orgin = xOrigin
+        }
+        return orgin
+        
+    }
 
 }
 
