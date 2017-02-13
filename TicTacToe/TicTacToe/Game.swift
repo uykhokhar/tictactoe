@@ -25,19 +25,17 @@ class Game {
     var gameOver : Bool {
         return countFilled > 8
     }
+    var winningTiles : (startRow: Int, startCol: Int, endRow: Int, endCol: Int )?
 
     
     
     init() {
-        
-        
         currentPiece = GamePieces(type: .X)
         allPieces.append(currentPiece)
         otherPiece = GamePieces(type: .O)
-        
     }
     
-    // Mark: game play
+    // MARK: game play
     //next turn: create new piece for the type that just ended and make the currentPiece the unplayed piece
     func nextTurn() -> GamePieces {
         
@@ -72,13 +70,18 @@ class Game {
         boardPieces = [[nil,nil,nil], [nil,nil,nil],[nil,nil,nil]]
         countFilled = 0
         allPieces = []
+        
+        
         currentPiece = GamePieces(type: .X)
+        allPieces.append(currentPiece)
+        otherPiece = GamePieces(type: .O)
+        
         
     }
     
     
     
-    // Mark: -check winner
+    // MARK: -check winner
     func checkWinner() -> pieceType? {
         
         for i in 0...2 {
@@ -106,6 +109,7 @@ class Game {
         let returnPiece : pieceType?
         
         if ((boardPieces[0][col] == boardPieces[1][col]) &&  (boardPieces[1][col] == boardPieces[2][col])) {
+            winningTiles = (startRow: 0, startCol: col, endRow: 2, endCol: col )
             returnPiece = boardPieces[0][col]
         } else {
             returnPiece = nil
@@ -118,8 +122,8 @@ class Game {
     func checkRow(row : Int) -> pieceType? {
         let returnPiece : pieceType?
         
-        //ensure nil doesn't equal nil
         if ((boardPieces[row][0] == boardPieces[row][1]) &&  (boardPieces[row][1] == boardPieces[row][2])) {
+            winningTiles = (startRow: row, startCol: 0, endRow: row, endCol: 2 )
             returnPiece = boardPieces[row][0]
         } else {
             returnPiece = nil
@@ -134,6 +138,7 @@ class Game {
         
         //ensure nil doesn't equal nil
         if ((boardPieces[0][0] == boardPieces[1][1]) &&  (boardPieces[1][1] == boardPieces[2][2])) {
+            winningTiles = (startRow: 0, startCol: 0, endRow: 2, endCol: 2 )
             returnPiece = boardPieces[0][0]
         } else {
             returnPiece = nil
@@ -149,6 +154,7 @@ class Game {
         
         //ensure nil doesn't equal nil
         if ((boardPieces[0][2] == boardPieces[1][1]) &&  (boardPieces[1][1] == boardPieces[2][0])) {
+            winningTiles = (startRow: 0, startCol: 2, endRow: 2, endCol: 0 )
             returnPiece = boardPieces[1][1]
         } else {
             returnPiece = nil
@@ -159,7 +165,7 @@ class Game {
     }
     
     
-    // Mark: - tile functions
+    // MARK: - tile functions
     func setTile(row: Int, column: Int, piece: pieceType){
         boardPieces[row][column] = piece
         countFilled += 1

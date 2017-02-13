@@ -78,7 +78,7 @@ class GamePieces: UIImageView {
     
     
     func scaleAnimation(){
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: 0.3, delay: 0.1,
                        animations: {
                         self.transform = CGAffineTransform(scaleX: 2, y: 2)
         },

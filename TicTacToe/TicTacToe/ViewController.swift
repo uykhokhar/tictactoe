@@ -11,7 +11,7 @@ import UIKit
 
 struct ViewText {
     
-    static let help = (tag: 301, button: "Ok", text: "How to play. Players take turns: X's go first, O's go second. Player drags a shape into the grid. If any play gets three of their shapes into a row, column or diagonal, that player wins.")
+    static let help = (tag: 301, button: "Got it!", text: "How to play. Players take turns: X's go first, O's go second. Player drags a shape into the grid. If any play gets three of their shapes into a row, column or diagonal, that player wins.")
     static let win = (tag: 302, button: "New Game", text: "Congratulations!")
     static let stalemate = (tag: 303, button: "OK", text: "The game is a stalemate")
 }
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
 
     var game = Game()
     var winner : pieceType?
+    var line = CAShapeLayer()
 
     
     // MARK: -IBoutlets
@@ -147,13 +148,42 @@ class ViewController: UIViewController {
     func newBoard() {
         
         for piece in game.allPieces {
-            UIView.animate(withDuration: 0.1, delay: 0.1, options: .curveEaseInOut,
+            UIView.animate(withDuration: 0.8, delay: 0.2, options: .curveEaseInOut,
                            animations: {
                             piece.center.x -= self.view.bounds.width
             }, completion: nil
             )
         }
         game.newGame()
+        
+        self.view.addSubview(game.currentPiece)
+        self.view.addSubview(game.otherPiece)
+        
+        addGesture(piece: game.currentPiece)
+        addGesture(piece: game.otherPiece)
+        
+        game.currentPiece.enable()
+        game.currentPiece.scaleAnimation()
+        game.otherPiece.diable(alpha: 0.5)
+        
+        
+    }
+    
+    // ATTRIBUTION: http://stackoverflow.com/questions/40556112/how-to-draw-a-line-in-swift-3
+    func drawLine(acrossTiles: (startRow: Int, startCol: Int, endRow: Int, endCol: Int )) {
+        
+        let start = tiles[acrossTiles.startRow][acrossTiles.startCol].center
+        let end = tiles[acrossTiles.endRow][acrossTiles.endCol].center
+        
+        line = CAShapeLayer()
+        let linePath = UIBezierPath()
+        linePath.move(to: start)
+        linePath.addLine(to: end)
+        line.path = linePath.cgPath
+        line.strokeColor = UIColor.green.cgColor
+        line.lineWidth = 12
+        line.lineJoin = kCALineJoinRound
+        self.view.layer.addSublayer(line)
     }
     
     
@@ -168,7 +198,8 @@ class ViewController: UIViewController {
         self.view.bringSubview(toFront: animatedView)
         
         aniTextView.text = text
-
+        aniViewButton.setTitle(title, for: .normal)
+        
         UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseInOut,
                        animations: {
                         self.animatedView.center.y += self.view.bounds.height
@@ -176,7 +207,7 @@ class ViewController: UIViewController {
         )
     }
     
-    
+    // ATTRIBUTION: delay presentation of new board until animation removed: http://stackoverflow.com/questions/28821722/delaying-function-in-swift
     func genericDismissView(){
         UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveLinear,
                        animations: {
@@ -184,27 +215,44 @@ class ViewController: UIViewController {
         }, completion: nil
         )
         
-        //post dismissal logic
+        
+        //post dismissal logic delayed
+        unowned let unownedSelf = self
+        
+        let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            unownedSelf.dismissViewSwitch()
+        })
+        
+        
+        
+
+    }
+    
+    func dismissViewSwitch(){
         
         switch aniViewButton.currentTitle! {
         case ViewText.help.button:
             game.currentPiece.enable()
         case ViewText.win.button:
             newBoard()
+            line.removeFromSuperlayer()
         case ViewText.stalemate.button:
             newBoard()
         default:
             print("default case ", #function)
         }
-        
-        
+
     }
+
+    
     
     
     // How to play view controller
     @IBAction func presentView(_ sender: Any) {
 
         genericPresentView(title: ViewText.help.button, text: ViewText.help.text)
+        print(ViewText.help.button)
     }
     
     
@@ -218,8 +266,10 @@ class ViewController: UIViewController {
     
     
     // winning view controller 
-    func presentWinView(){
-        genericPresentView(title: ViewText.win.button, text: ViewText.win.text)
+    func presentWinView(winningPiece: pieceType){
+        
+        let text = ViewText.win.text + " " + winningPiece.rawValue + " won!"
+        genericPresentView(title: ViewText.win.button, text: text)
     }
     
     
@@ -272,7 +322,8 @@ class ViewController: UIViewController {
                     if let winner = winner {
                         print("winner is \(winner.rawValue)")
                         game.allPieces.append(game.otherPiece)
-                        presentWinView()
+                        drawLine(acrossTiles: game.winningTiles!)
+                        presentWinView(winningPiece: winner)
                     } else if game.gameOver { //new board
                         print("Game Over!")
                         presentStaleMate()
